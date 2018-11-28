@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.util.NoSuchElementException;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 
 public class Server{
 
@@ -93,12 +95,42 @@ class clientThread extends Thread{
 				String requestedFile = parser.nextToken().toLowerCase();
 				System.out.println("Requested File: " + requestedFile);
 
+				if(method.equals("GET")){
+					//This is a GET request, handling it
+					File file = new File(Server.DIRECTORY, requestedFile);
+					int fileLength = (int) file.length();
+
+					if(file.exists()){
+						System.out.println("Requested file exists");
+						FileInputStream fileIn = new FileInputStream(file);
+						byte[] fileData = new byte[fileLength];
+						fileIn.read(fileData);
+						fileIn.close();
+						
+						//Send file to client
+						sendFileToClient(fileData, file);
+
+						
+							
+					}else{
+						//Send 404 
+						System.out.println("requested file not found");
+					}
+				}
+				else{
+					/*Not a GET request, so we will ignore this as
+					functionality other than GET is not supported
+					by this program */
+					System.out.println("Unsupported Method Received, Ignoring\n");
+
+				}
+
 			}catch(IOException e){
 				System.err.println("Error in thread run: " + e.getMessage());
 				break;
 			}catch(NoSuchElementException e){
 				System.out.println("Incorrect request format received: " + input);
-				System.out.println("Ignoring incorrect request");
+				System.out.println("Ignoring incorrect request\n");
 				continue;
 			}
 		}
@@ -112,6 +144,16 @@ class clientThread extends Thread{
 				System.err.println("Error ending thread: " + e.getMessage());
 			} 
 		} */
+	}
+
+	private void sendFileToClient(byte[] fileData, File file){
+		out.println("HTTP/1.1 200 OK");
+		out.println("Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut");
+		out.println("Content-type: ");
+		out.println("Content-length: " + (int) file.length());
+		out.println();
+		out.flush();
+
 	}
 
 }
