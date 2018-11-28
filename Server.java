@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import java.util.NoSuchElementException;
 
 
 public class Server{
@@ -64,22 +65,30 @@ class clientThread extends Thread{
 		System.out.println("A client has connected");
 		
 		//Holds received information
-		String input;
+		String input = "";
 		
-		try{
-			input = in.readLine();
-			System.out.println("Received from Client: " + input);
+		while(true){
+			try{
+				input = in.readLine();
+				System.out.println("Received from Client: " + input);
 
-			StringTokenizer parser = new StringTokenizer(input);
-			String method = parser.nextToken().toUpperCase();
-			System.out.println("Method: " + method);
+				StringTokenizer parser = new StringTokenizer(input);
+				String method = parser.nextToken().toUpperCase();
+				System.out.println("Method: " + method);
 
-			String requestedFile = parser.nextToken().toLowerCase();
-			System.out.println("Requested File: " + requestedFile);
+				String requestedFile = parser.nextToken().toLowerCase();
+				System.out.println("Requested File: " + requestedFile);
 
-		}catch(IOException e){
-			System.err.println("Error in thread run: " + e.getMessage());
-		}finally{
+			}catch(IOException e){
+				System.err.println("Error in thread run: " + e.getMessage());
+				break;
+			}catch(NoSuchElementException e){
+				System.out.println("Incorrect request format received: " + input);
+				System.out.println("Ignoring incorrect request");
+				continue;
+			}
+		}
+		/*finally{
 			try{
 				//Destructing reader, writer, and socket to end the thread 
 				in.close();
@@ -87,8 +96,8 @@ class clientThread extends Thread{
 				clientSocket.close();
 			}catch(IOException e){
 				System.err.println("Error ending thread: " + e.getMessage());
-			}
-		}
+			} 
+		} */
 	}
 
 }
