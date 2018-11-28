@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.io.BufferedOutputStream;
+import java.util.Date;
 
 public class Server{
 
@@ -113,7 +114,7 @@ class clientThread extends Thread{
 						fileIn.read(fileData);
 						fileIn.close();
 						
-						//Send file to client
+						//Send file to client *Private Helper Method*
 						sendFileToClient(fileData, file);
 
 						
@@ -121,6 +122,9 @@ class clientThread extends Thread{
 					}else{
 						//Send 404 
 						System.out.println("requested file not found");
+						
+						//Sending 404 to client
+						sendFileNotFoundReply();
 					}
 				}
 				else{
@@ -156,6 +160,7 @@ class clientThread extends Thread{
 		//Sending HTTP header
 		out.println("HTTP/1.1 200 OK");
 		out.println("Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut");
+		out.println("Date: " + new Date());
 		out.println("Content-type: ");
 		out.println("Content-length: " + (int) file.length());
 		out.println();
@@ -169,6 +174,16 @@ class clientThread extends Thread{
 			System.err.println("Error sending file: " + e.getMessage());
 		}
 
+	}
+
+	private void sendFileNotFoundReply(){
+		out.println("HTTP/1.1 0 File Not Found");
+		out.println("Server: Data Web Server project, Nathan Wichman, Prof. Kalafut");
+		out.println("Date: " + new Date());
+		out.println("Content-type: ");
+		out.println("Content-length: ");
+		out.println();
+		out.flush();
 	}
 
 }
