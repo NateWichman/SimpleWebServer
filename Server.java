@@ -158,10 +158,11 @@ class clientThread extends Thread{
 
 	private void sendFileToClient(byte[] fileData, File file){
 		//Sending HTTP header
+		String content = getContentType(file);
 		out.println("HTTP/1.1 200 OK");
 		out.println("Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut");
 		out.println("Date: " + new Date());
-		out.println("Content-type: ");
+		out.println("Content-type: " + content);
 		out.println("Content-length: " + (int) file.length());
 		out.println();
 		out.flush();
@@ -177,13 +178,46 @@ class clientThread extends Thread{
 	}
 
 	private void sendFileNotFoundReply(){
-		out.println("HTTP/1.1 0 File Not Found");
+		String content = "text/html";
+		File file = new File(Server.DIRECTORY, "fileNotFound.html");
+		byte[] fileData = new byte[(int) file.length()];
+		try{
+			FileInputStream fIn = new FileInputStream(file);
+			fIn.read(fileData);
+			fIn.close();
+		}catch(IOException e){
+			System.err.println("Error gathering 404 file: " + e.getMessage());
+		}
+
+		out.println("HTTP/1.1 404 File Not Found");
 		out.println("Server: Data Web Server project, Nathan Wichman, Prof. Kalafut");
 		out.println("Date: " + new Date());
-		out.println("Content-type: ");
-		out.println("Content-length: ");
+		out.println("Content-type: " + content);
+		out.println("Content-length: " + (int) file.length());
 		out.println();
 		out.flush();
+
+		try{
+			fileOut.write(fileData, 0, (int) file.length());
+			fileOut.flush();
+		}catch(IOException e){
+			System.err.println("Error sending 404 file: " + e.getMessage());
+		}
+	}
+
+	private String getContentType(File requestedFile){
+		String file = requestedFile.getName();
+		if(file.endsWith(".html") || file.endsWith(".htm")){
+			return "text/html";
+		}else if(file.endsWith(".txt")){
+			return "text/plain";
+		}else if(file.endsWith(".jpg")){
+			return "image/jpeg";
+		}else if(file.endsWith(".pdf")){
+			return "application/pdf";
+		}else{
+			return null;
+		}
 	}
 
 }
