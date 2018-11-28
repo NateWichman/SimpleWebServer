@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+import java.io.BufferedOutputStream;
 
 public class Server{
 
@@ -55,11 +56,14 @@ class clientThread extends Thread{
 	/** A socket for the client this thread is handling **/
 	private Socket clientSocket;
 
-	/** For receiving information from the client **/
+	/** For receiving GET requests from the client **/
 	private BufferedReader in = null;
 
-	/** For sending information to the client **/
+	/** For sending the HTTP header string to the client **/
 	private PrintWriter out = null;
+
+	/** For sending file data to the client **/
+	private	BufferedOutputStream fileOut = null;
 
 	public clientThread(Socket clientSocket){
 		this.clientSocket = clientSocket;
@@ -69,6 +73,8 @@ class clientThread extends Thread{
 			in = new BufferedReader(new InputStreamReader(
 					clientSocket.getInputStream()));
 			out = new PrintWriter(clientSocket.getOutputStream());
+			fileOut = new BufferedOutputStream(clientSocket.getOutputStream());
+
 
 		}catch(IOException e){
 			System.err.println("Error initializing reader and writer: "
@@ -147,12 +153,21 @@ class clientThread extends Thread{
 	}
 
 	private void sendFileToClient(byte[] fileData, File file){
+		//Sending HTTP header
 		out.println("HTTP/1.1 200 OK");
 		out.println("Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut");
 		out.println("Content-type: ");
 		out.println("Content-length: " + (int) file.length());
 		out.println();
 		out.flush();
+
+		//Sending File
+		try{
+			fileOut.write(fileData, 0, (int) file.length());
+			fileOut.flush();
+		}catch(IOException e){
+			System.err.println("Error sending file: " + e.getMessage());
+		}
 
 	}
 
