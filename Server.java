@@ -6,14 +6,28 @@ import java.io.PrintWriter;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.util.NoSuchElementException;
-
+import java.io.File;
 
 public class Server{
 
 	/** The port number for this Server to listen on **/
 	static final int PORT_NUMBER = 8080;
+	static final File DIRECTORY = new File(".");
+	static File[] listOfFiles;
 
 	public static void main(String[] args){
+		//Getting all Files in directory and adding them to listOfFiles
+		File folder = new File(".");
+	        listOfFiles = folder.listFiles();
+
+		for(File x : listOfFiles){
+			if(x.isFile())
+				System.out.println("File: " + x.getName());
+			else if(x.isDirectory())
+				System.out.println("Directory: " + x.getName());
+		}
+		
+		
 		try{
 			//Socket to accept incomming clients
 			ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
