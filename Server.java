@@ -19,18 +19,42 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
+/*********************************************************
+Basic web server. Handles HTTP GET requests only, all
+other request will send back a 501 unnsupported method 
+page. If the requested file does not exist in that directory,
+a 404 page will be sent back. Can handle multiple clients
+at once through threads.
+
+@author Nathan Wichman
+@version Fall 2018
+**********************************************************/
 public class Server{
 
 	/** The port number for this Server to listen on **/
 	static int PORT_NUMBER = 8080;
+	
+	/**The default file directory **/
 	static File DIRECTORY = new File(".");
+	
+	/** default log file **/
 	static String LOG_FILE = "log.txt";
+	
+	/** used to store the list of all files within the directory **/
 	static File[] listOfFiles;
+	
+	/** Used for formatting the date in the HTTP GET responses generated **/
 	static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	
+	/** For logging GET requests and response headers **/
 	static Logger logger = Logger.getLogger("log");
+	
+	/** File Handler for the logger **/
 	static FileHandler fileHandler;
 
 	public static void main(String[] args){
+		
+		//Parsing command line arguments if given
 		if(args.length >= 2){
 			String result;
 			for(int i = 0; i < args.length; i++){
@@ -61,6 +85,7 @@ public class Server{
 		File folder = new File(".");
 	        listOfFiles = folder.listFiles();
 
+		//Printing out files for testing purposes
 		for(File x : listOfFiles){
 			if(x.isFile())
 				System.out.println("File: " + x.getName());
@@ -88,7 +113,14 @@ public class Server{
 	}
 	
 }
+/*************************************************
+Handles an individual client so that the main 
+method in the Server class can wait for another
+client.
 
+@author Nathan Wichman
+@version Fall 2018
+*************************************************/
 class clientThread extends Thread{
 	
 	/** A socket for the client this thread is handling **/
@@ -129,16 +161,19 @@ class clientThread extends Thread{
 		
 		while(true){
 			try{
+				//Reading a request from the client
 				input = in.readLine();
 				System.out.println("Received from Client: " + input);
 				System.out.println("logging request");
 				//private helper method
 				log(input);
 
+				//Breaking while loop to close connection if the client requests
 				if(input.contains("Connection: close")){
 					break;
 				}
 
+				//Parsing the received line into the correct HTTP format
 				StringTokenizer parser = new StringTokenizer(input);
 				String method = parser.nextToken().toUpperCase();
 				System.out.println("Method: " + method);
@@ -163,6 +198,7 @@ class clientThread extends Thread{
 						}
 					}
 
+					
 					if(file.exists() && existsInDirectory){
 						System.out.println("Requested file exists");
 						FileInputStream fileIn = new FileInputStream(file);
@@ -198,11 +234,13 @@ class clientThread extends Thread{
 			}catch(NoSuchElementException e){
 				System.out.println("Incorrect request format received: " + input);
 				System.out.println("Ignoring incorrect request\n");
+				//If we are totally confused by the client we will send this
 				sendUnsupportedMethod();
 				continue;
 			}
 		}
 		try{
+			//Closing the client's connections and cleaning up 
 			out.close();
 			in.close();
 			clientSocket.close();
@@ -212,6 +250,11 @@ class clientThread extends Thread{
 		}
 	}
 
+	/******************************************************
+	Sends a inputted file to the client.
+	
+	@param the files data in bytes and its File object
+	******************************************************/
 	private void sendFileToClient(byte[] fileData, File file){
 		//Sending HTTP header
 		String content = getContentType(file);
@@ -241,10 +284,15 @@ class clientThread extends Thread{
 		log("Last-Modified: " + Server.sdf.format(file.lastModified()));
 
 	}
-
+	/*******************************************************
+	Sends the default 404 file not found page.
+	********************************************************/
 	private void sendFileNotFoundReply(){
+		//content type
 		String content = "text/html";
+		//opening hard-coded html file
 		File file = new File(Server.DIRECTORY, "fileNotFound.html");
+		//getting file data
 		byte[] fileData = new byte[(int) file.length()];
 		try{
 			FileInputStream fIn = new FileInputStream(file);
@@ -254,6 +302,7 @@ class clientThread extends Thread{
 			System.err.println("Error gathering 404 file: " + e.getMessage());
 		}
 
+		//Sending HTTP Header 
 		out.println("HTTP/1.1 404 File Not Found");
 		out.println("Server: Data Web Server project, Nathan Wichman, Prof. Kalafut");
 		out.println("Date: " + new Date());
@@ -263,6 +312,7 @@ class clientThread extends Thread{
 		out.println();
 		out.flush();
 
+		//Sending 404 File
 		try{
 			fileOut.write(fileData, 0, (int) file.length());
 			fileOut.flush();
@@ -280,10 +330,15 @@ class clientThread extends Thread{
 
 
 	}
-
+	/***************************************************
+	Sends the 501 unsupported method file to the client
+	***************************************************/
 	private void sendUnsupportedMethod(){
+		//content type
 		String content = "text/html";
+		//hard-coded 501 html file
 		File file = new File(Server.DIRECTORY, "unsupportedMethod.html");
+		//getting file data
 		byte[] fileData = new byte[(int) file.length()];
 		try{
 			FileInputStream fIn = new FileInputStream(file);
@@ -293,6 +348,7 @@ class clientThread extends Thread{
 			System.err.println("Error gathering 501 file: " + e.getMessage());
 		}
 
+		//sending HTTP header
 		out.println("HTTP/1.1 501 Not Implemented");
 		out.println("Server: Data Com Web Server project, Nathan Wichman, Prof. Kalafut");
 		out.println("Date: " + new Date());
@@ -302,6 +358,7 @@ class clientThread extends Thread{
 		out.println();
 		out.flush();
 
+		//sending 501 file
 		try{
 			fileOut.write(fileData, 0, (int) file.length());
 			fileOut.flush();
@@ -317,7 +374,12 @@ class clientThread extends Thread{
 		log("Content-length: " + (int) file.length());
 		log("Last-Modified: " + Server.sdf.format(file.lastModified()));
 	}
-
+	/*****************************************************
+	gets the content type of an inputted file
+	
+	@param the file the client is requesting
+	@return the content type of that file
+	*****************************************************/
 	private String getContentType(File requestedFile){
 		String file = requestedFile.getName();
 		if(file.endsWith(".html") || file.endsWith(".htm")){
@@ -332,7 +394,13 @@ class clientThread extends Thread{
 			return null;
 		}
 	}
-
+	
+	/****************************************
+	Logs a string to the staticly declared log
+	file
+	
+	@param a string to be logged
+	*****************************************/
 	private synchronized void log(String line){
 		Server.logger.info(line);
 	}
