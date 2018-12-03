@@ -22,14 +22,22 @@ import java.util.logging.SimpleFormatter;
 public class Server{
 
 	/** The port number for this Server to listen on **/
-	static final int PORT_NUMBER = 3000;
-	static final File DIRECTORY = new File(".");
+	static int PORT_NUMBER = 3000;
+	static File DIRECTORY = new File(".");
 	static File[] listOfFiles;
 	static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	static Logger logger = Logger.getLogger("log");
 	static FileHandler fileHandler;
 
 	public static void main(String[] args){
+		if(args.length >= 2){
+			String result;
+			for(String command : args){
+				if(command.startsWith("-p")){
+					PORT_NUMBER = Integer.parseInt(args[1]);
+				}
+			}
+		}
 		//Creating Log
 		try{
 			fileHandler = new FileHandler("log.txt");

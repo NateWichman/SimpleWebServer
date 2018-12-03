@@ -1,18 +1,18 @@
-Dec 02, 2018 8:15:07 PM Server main
+Dec 02, 2018 8:28:48 PM Server main
 INFO: Logging has begun for this session
-Dec 02, 2018 8:15:18 PM clientThread log
-INFO: GET popcan.txt
-Dec 02, 2018 8:15:18 PM clientThread log
-INFO: HTTP/1.1 200 OK
-Dec 02, 2018 8:15:18 PM clientThread log
-INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 02, 2018 8:15:18 PM clientThread log
-INFO: Date: Sun Dec 02 20:15:18 EST 2018
-Dec 02, 2018 8:15:18 PM clientThread log
-INFO: Content-type: text/plain
-Dec 02, 2018 8:15:18 PM clientThread log
-INFO: Content-length: 51
-Dec 02, 2018 8:15:18 PM clientThread log
-INFO: Last-Modified: 11/28/2018 17:20:35
-Dec 02, 2018 8:15:24 PM clientThread log
+Dec 02, 2018 8:29:08 PM clientThread log
+INFO: GET popcna.t
+Dec 02, 2018 8:29:08 PM clientThread log
+INFO: HTTP/1.1 404 File Not Found
+Dec 02, 2018 8:29:08 PM clientThread log
+INFO: Server: Data Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 02, 2018 8:29:08 PM clientThread log
+INFO: Date: Sun Dec 02 20:29:08 EST 2018
+Dec 02, 2018 8:29:08 PM clientThread log
+INFO: Content-type: text/html
+Dec 02, 2018 8:29:08 PM clientThread log
+INFO: Content-length: 132
+Dec 02, 2018 8:29:08 PM clientThread log
+INFO: Last-Modified: 11/28/2018 15:21:37
+Dec 02, 2018 8:29:16 PM clientThread log
 INFO: Connection: close
