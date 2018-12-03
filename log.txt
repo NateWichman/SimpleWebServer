@@ -1,16 +1,30 @@
-Dec 02, 2018 8:44:04 PM Server main
+Dec 02, 2018 9:16:26 PM Server main
 INFO: Logging has begun for this session
-Dec 02, 2018 8:44:17 PM clientThread log
-INFO: Get
-Dec 02, 2018 8:44:17 PM clientThread log
-INFO: HTTP/1.1 501 Not Implemented
-Dec 02, 2018 8:44:17 PM clientThread log
-INFO: Server: Data Com Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 02, 2018 8:44:17 PM clientThread log
-INFO: Date: Sun Dec 02 20:44:17 EST 2018
-Dec 02, 2018 8:44:17 PM clientThread log
+Dec 02, 2018 9:16:36 PM clientThread log
+INFO: GET popcan.txt
+Dec 02, 2018 9:16:36 PM clientThread log
+INFO: HTTP/1.1 200 OK
+Dec 02, 2018 9:16:36 PM clientThread log
+INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 02, 2018 9:16:36 PM clientThread log
+INFO: Date: Sun Dec 02 21:16:36 EST 2018
+Dec 02, 2018 9:16:36 PM clientThread log
+INFO: Content-type: text/plain
+Dec 02, 2018 9:16:36 PM clientThread log
+INFO: Content-length: 51
+Dec 02, 2018 9:16:36 PM clientThread log
+INFO: Last-Modified: 12/02/2018 21:11:53
+Dec 02, 2018 9:16:49 PM clientThread log
+INFO: GET zoom.html
+Dec 02, 2018 9:16:49 PM clientThread log
+INFO: HTTP/1.1 200 OK
+Dec 02, 2018 9:16:49 PM clientThread log
+INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 02, 2018 9:16:49 PM clientThread log
+INFO: Date: Sun Dec 02 21:16:49 EST 2018
+Dec 02, 2018 9:16:49 PM clientThread log
 INFO: Content-type: text/html
-Dec 02, 2018 8:44:17 PM clientThread log
-INFO: Content-length: 216
-Dec 02, 2018 8:44:17 PM clientThread log
-INFO: Last-Modified: 12/02/2018 19:13:44
+Dec 02, 2018 9:16:49 PM clientThread log
+INFO: Content-length: 13
+Dec 02, 2018 9:16:49 PM clientThread log
+INFO: Last-Modified: 12/02/2018 21:11:53
