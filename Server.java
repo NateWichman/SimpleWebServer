@@ -11,11 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.io.BufferedOutputStream;
 import java.util.Date;
+import java.util.Vector;
 
 public class Server{
 
 	/** The port number for this Server to listen on **/
-	static final int PORT_NUMBER = 8080;
+	static final int PORT_NUMBER = 3000;
 	static final File DIRECTORY = new File(".");
 	static File[] listOfFiles;
 
@@ -131,7 +132,8 @@ class clientThread extends Thread{
 					/*Not a GET request, so we will ignore this as
 					functionality other than GET is not supported
 					by this program */
-					System.out.println("Unsupported Method Received, Ignoring\n");
+					System.out.println("Unsupported Method Received, Sending 501\n");
+					sendUnsupportedMethod();
 
 				}
 
@@ -144,16 +146,6 @@ class clientThread extends Thread{
 				continue;
 			}
 		}
-		/*finally{
-			try{
-				//Destructing reader, writer, and socket to end the thread 
-				in.close();
-				out.close();
-				clientSocket.close();
-			}catch(IOException e){
-				System.err.println("Error ending thread: " + e.getMessage());
-			} 
-		} */
 	}
 
 	private void sendFileToClient(byte[] fileData, File file){
@@ -202,6 +194,34 @@ class clientThread extends Thread{
 			fileOut.flush();
 		}catch(IOException e){
 			System.err.println("Error sending 404 file: " + e.getMessage());
+		}
+	}
+
+	private void sendUnsupportedMethod(){
+		String content = "text/html";
+		File file = new File(Server.DIRECTORY, "unsupportedMethod.html");
+		byte[] fileData = new byte[(int) file.length()];
+		try{
+			FileInputStream fIn = new FileInputStream(file);
+			fIn.read(fileData);
+			fIn.close();
+		}catch(IOException e){
+			System.err.println("Error gathering 501 file: " + e.getMessage());
+		}
+
+		out.println("HTTP/1.1 501 Not Implemented");
+		out.println("Server: Data Com Web Server project, Nathan Wichman, Prof. Kalafut");
+		out.println("Date: " + new Date());
+		out.println("Content-type: " + content);
+		out.println("Content-length: " + (int) file.length());
+		out.println();
+		out.flush();
+
+		try{
+			fileOut.write(fileData, 0, (int) file.length());
+			fileOut.flush();
+		}catch(IOException e){
+			System.err.println("Error sending 501 file: " + e.getMessage());
 		}
 	}
 
