@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.BufferedOutputStream;
 import java.util.Date;
 import java.util.Vector;
+import java.text.SimpleDateFormat;
 
 public class Server{
 
@@ -19,6 +20,7 @@ public class Server{
 	static final int PORT_NUMBER = 3000;
 	static final File DIRECTORY = new File(".");
 	static File[] listOfFiles;
+	static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
 	public static void main(String[] args){
 		//Getting all Files in directory and adding them to listOfFiles
@@ -106,9 +108,21 @@ class clientThread extends Thread{
 				if(method.equals("GET")){
 					//This is a GET request, handling it
 					File file = new File(Server.DIRECTORY, requestedFile);
+				
 					int fileLength = (int) file.length();
+					
+					
+					/*I dont think I need this, as I 
+					believe the above code does the same thing,
+					but it is just a procaution...*/
+					boolean existsInDirectory = false;
+					for(File x : Server.listOfFiles){
+						if(file.getName().equals(x.getName())){
+							existsInDirectory = true;
+						}
+					}
 
-					if(file.exists()){
+					if(file.exists() && existsInDirectory){
 						System.out.println("Requested file exists");
 						FileInputStream fileIn = new FileInputStream(file);
 						byte[] fileData = new byte[fileLength];
@@ -156,6 +170,7 @@ class clientThread extends Thread{
 		out.println("Date: " + new Date());
 		out.println("Content-type: " + content);
 		out.println("Content-length: " + (int) file.length());
+		out.println("Last-Modified: " + Server.sdf.format(file.lastModified()));
 		out.println();
 		out.flush();
 
@@ -186,6 +201,7 @@ class clientThread extends Thread{
 		out.println("Date: " + new Date());
 		out.println("Content-type: " + content);
 		out.println("Content-length: " + (int) file.length());
+		out.println("Last-Modified: " + Server.sdf.format(file.lastModified()));
 		out.println();
 		out.flush();
 
@@ -214,6 +230,7 @@ class clientThread extends Thread{
 		out.println("Date: " + new Date());
 		out.println("Content-type: " + content);
 		out.println("Content-length: " + (int) file.length());
+		out.println("Last-Modified: " + Server.sdf.format(file.lastModified()));
 		out.println();
 		out.flush();
 
