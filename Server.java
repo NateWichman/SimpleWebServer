@@ -22,8 +22,9 @@ import java.util.logging.SimpleFormatter;
 public class Server{
 
 	/** The port number for this Server to listen on **/
-	static int PORT_NUMBER = 3000;
+	static int PORT_NUMBER = 8080;
 	static File DIRECTORY = new File(".");
+	static String LOG_FILE = "log.txt";
 	static File[] listOfFiles;
 	static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	static Logger logger = Logger.getLogger("log");
@@ -32,15 +33,22 @@ public class Server{
 	public static void main(String[] args){
 		if(args.length >= 2){
 			String result;
-			for(String command : args){
+			for(int i = 0; i < args.length; i++){
+				String command = args[i];
 				if(command.startsWith("-p")){
-					PORT_NUMBER = Integer.parseInt(args[1]);
+					PORT_NUMBER = Integer.parseInt(args[i + 1]);
+				}
+				if(command.startsWith("-docroot")){
+					DIRECTORY = new File(args[i + 1]);
+				}
+				if(command.startsWith("-logfile")){
+					LOG_FILE = args[i + 1];
 				}
 			}
 		}
 		//Creating Log
 		try{
-			fileHandler = new FileHandler("log.txt");
+			fileHandler = new FileHandler(LOG_FILE);
 			logger.addHandler(fileHandler);
 			SimpleFormatter formatter = new SimpleFormatter();
 			fileHandler.setFormatter(formatter);
