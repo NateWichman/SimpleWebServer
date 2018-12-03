@@ -198,6 +198,7 @@ class clientThread extends Thread{
 			}catch(NoSuchElementException e){
 				System.out.println("Incorrect request format received: " + input);
 				System.out.println("Ignoring incorrect request\n");
+				sendUnsupportedMethod();
 				continue;
 			}
 		}
