@@ -13,6 +13,11 @@ import java.io.BufferedOutputStream;
 import java.util.Date;
 import java.util.Vector;
 import java.text.SimpleDateFormat;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 public class Server{
 
@@ -21,8 +26,21 @@ public class Server{
 	static final File DIRECTORY = new File(".");
 	static File[] listOfFiles;
 	static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	static Logger logger = Logger.getLogger("log");
+	static FileHandler fileHandler;
 
 	public static void main(String[] args){
+		//Creating Log
+		try{
+			fileHandler = new FileHandler("log.txt");
+			logger.addHandler(fileHandler);
+			SimpleFormatter formatter = new SimpleFormatter();
+			fileHandler.setFormatter(formatter);
+
+			logger.info("Logging has begun for this session");
+		}catch(Exception e){
+			System.err.println("Error setting up logger: " + e.getMessage());
+		}
 		//Getting all Files in directory and adding them to listOfFiles
 		File folder = new File(".");
 	        listOfFiles = folder.listFiles();
@@ -97,6 +115,13 @@ class clientThread extends Thread{
 			try{
 				input = in.readLine();
 				System.out.println("Received from Client: " + input);
+				System.out.println("logging request");
+				//private helper method
+				log(input);
+
+				if(input.contains("Connection: close")){
+					break;
+				}
 
 				StringTokenizer parser = new StringTokenizer(input);
 				String method = parser.nextToken().toUpperCase();
@@ -160,6 +185,14 @@ class clientThread extends Thread{
 				continue;
 			}
 		}
+		try{
+			out.close();
+			in.close();
+			clientSocket.close();
+			fileOut.close();
+		}catch(IOException e){
+			System.err.println("Error closing connection" + e.getMessage());
+		}
 	}
 
 	private void sendFileToClient(byte[] fileData, File file){
@@ -181,6 +214,14 @@ class clientThread extends Thread{
 		}catch(IOException e){
 			System.err.println("Error sending file: " + e.getMessage());
 		}
+
+		//Logging 
+		log("HTTP/1.1 200 OK");
+		log("Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut");
+		log("Date: " + new Date());
+		log("Content-type: " + content);
+		log("Content-length: " + (int) file.length());
+		log("Last-Modified: " + Server.sdf.format(file.lastModified()));
 
 	}
 
@@ -211,6 +252,16 @@ class clientThread extends Thread{
 		}catch(IOException e){
 			System.err.println("Error sending 404 file: " + e.getMessage());
 		}
+
+		//logging
+		log("HTTP/1.1 404 File Not Found");
+		log("Server: Data Web Server project, Nathan Wichman, Prof. Kalafut");
+		log("Date: " + new Date());
+		log("Content-type: " + content);
+		log("Content-length: " + (int) file.length());
+		log("Last-Modified: " + Server.sdf.format(file.lastModified()));
+
+
 	}
 
 	private void sendUnsupportedMethod(){
@@ -240,6 +291,14 @@ class clientThread extends Thread{
 		}catch(IOException e){
 			System.err.println("Error sending 501 file: " + e.getMessage());
 		}
+
+		//logging
+		log("HTTP/1.1 501 Not Implemented");
+		log("Server: Data Com Web Server project, Nathan Wichman, Prof. Kalafut");
+		log("Date: " + new Date());
+		log("Content-type: " + content);
+		log("Content-length: " + (int) file.length());
+		log("Last-Modified: " + Server.sdf.format(file.lastModified()));
 	}
 
 	private String getContentType(File requestedFile){
@@ -255,6 +314,10 @@ class clientThread extends Thread{
 		}else{
 			return null;
 		}
+	}
+
+	private synchronized void log(String line){
+		Server.logger.info(line);
 	}
 
 }
