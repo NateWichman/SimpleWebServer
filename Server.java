@@ -168,8 +168,21 @@ class clientThread extends Thread{
 				//private helper method
 				log(input);
 
+				String total = "";
+				while(true){
+					String line = in.readLine();
+					if(line.equals("")){
+						break;
+					}else{
+						total += line;
+					}
+				}
+
+
+				System.out.println("total: " + total);
+
 				//Breaking while loop to close connection if the client requests
-				if(input.contains("Connection: close")){
+				if(input.contains("Connection: close") || total.contains("Connection: close")){
 					break;
 				}
 
