@@ -1,120 +1,154 @@
-Dec 03, 2018 9:38:32 PM Server main
+Dec 03, 2018 11:20:05 PM Server main
 INFO: Logging has begun for this session
-Dec 03, 2018 9:38:57 PM clientThread log
+Dec 03, 2018 11:20:17 PM clientThread log
+INFO: GET popcan.txt
+Dec 03, 2018 11:20:18 PM clientThread log
+INFO: HTTP/1.1 200 OK
+Dec 03, 2018 11:20:18 PM clientThread log
+INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 03, 2018 11:20:18 PM clientThread log
+INFO: Date: Mon Dec 03 23:20:18 EST 2018
+Dec 03, 2018 11:20:18 PM clientThread log
+INFO: Content-type: text/plain
+Dec 03, 2018 11:20:18 PM clientThread log
+INFO: Content-length: 58
+Dec 03, 2018 11:20:18 PM clientThread log
+INFO: Last-Modified: 12/03/2018 23:20:01
+Dec 03, 2018 11:20:30 PM clientThread log
 INFO: GET /popcan.txt HTTP/1.1
-Dec 03, 2018 9:38:57 PM clientThread log
+Dec 03, 2018 11:20:30 PM clientThread log
 INFO: HTTP/1.1 200 OK
-Dec 03, 2018 9:38:57 PM clientThread log
+Dec 03, 2018 11:20:30 PM clientThread log
 INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Date: Mon Dec 03 21:38:57 EST 2018
-Dec 03, 2018 9:38:57 PM clientThread log
+Dec 03, 2018 11:20:30 PM clientThread log
+INFO: Date: Mon Dec 03 23:20:30 EST 2018
+Dec 03, 2018 11:20:30 PM clientThread log
 INFO: Content-type: text/plain
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Content-length: 51
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: GET /favicon.ico HTTP/1.1
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: HTTP/1.1 404 File Not Found
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Server: Data Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Date: Mon Dec 03 21:38:57 EST 2018
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Content-type: text/html
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Content-length: 132
-Dec 03, 2018 9:38:57 PM clientThread log
-INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:39:00 PM clientThread log
-INFO: GET /popcan.txtsds HTTP/1.1
-Dec 03, 2018 9:39:00 PM clientThread log
-INFO: HTTP/1.1 404 File Not Found
-Dec 03, 2018 9:39:00 PM clientThread log
-INFO: Server: Data Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:39:00 PM clientThread log
-INFO: Date: Mon Dec 03 21:39:00 EST 2018
-Dec 03, 2018 9:39:00 PM clientThread log
-INFO: Content-type: text/html
-Dec 03, 2018 9:39:00 PM clientThread log
-INFO: Content-length: 132
-Dec 03, 2018 9:39:00 PM clientThread log
-INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:39:08 PM clientThread log
+Dec 03, 2018 11:20:30 PM clientThread log
+INFO: Content-length: 58
+Dec 03, 2018 11:20:30 PM clientThread log
+INFO: Last-Modified: 12/03/2018 23:20:01
+Dec 03, 2018 11:20:35 PM clientThread log
+INFO: GET /popcan.txt HTTP/1.1
+Dec 03, 2018 11:20:35 PM clientThread log
+INFO: HTTP/1.1 200 OK
+Dec 03, 2018 11:20:35 PM clientThread log
+INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 03, 2018 11:20:35 PM clientThread log
+INFO: Date: Mon Dec 03 23:20:35 EST 2018
+Dec 03, 2018 11:20:35 PM clientThread log
+INFO: Content-type: text/plain
+Dec 03, 2018 11:20:35 PM clientThread log
+INFO: Content-length: 58
+Dec 03, 2018 11:20:35 PM clientThread log
+INFO: Last-Modified: 12/03/2018 23:20:01
+Dec 03, 2018 11:20:43 PM clientThread log
 INFO: null
-Dec 03, 2018 9:39:08 PM clientThread log
-INFO: GET /PUT HTTP/1.1
-Dec 03, 2018 9:39:08 PM clientThread log
+Dec 03, 2018 11:20:43 PM clientThread log
+INFO: GET /zoom.hml HTTP/1.1
+Dec 03, 2018 11:20:43 PM clientThread log
 INFO: HTTP/1.1 404 File Not Found
-Dec 03, 2018 9:39:08 PM clientThread log
+Dec 03, 2018 11:20:43 PM clientThread log
 INFO: Server: Data Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:39:08 PM clientThread log
-INFO: Date: Mon Dec 03 21:39:08 EST 2018
-Dec 03, 2018 9:39:08 PM clientThread log
+Dec 03, 2018 11:20:43 PM clientThread log
+INFO: Date: Mon Dec 03 23:20:43 EST 2018
+Dec 03, 2018 11:20:43 PM clientThread log
 INFO: Content-type: text/html
-Dec 03, 2018 9:39:08 PM clientThread log
+Dec 03, 2018 11:20:43 PM clientThread log
 INFO: Content-length: 132
-Dec 03, 2018 9:39:08 PM clientThread log
+Dec 03, 2018 11:20:43 PM clientThread log
 INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:39:17 PM clientThread log
-INFO: GET /pic.jpg HTTP/1.1
-Dec 03, 2018 9:39:17 PM clientThread log
-INFO: HTTP/1.1 200 OK
-Dec 03, 2018 9:39:17 PM clientThread log
-INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:39:17 PM clientThread log
-INFO: Date: Mon Dec 03 21:39:17 EST 2018
-Dec 03, 2018 9:39:17 PM clientThread log
-INFO: Content-type: image/jpeg
-Dec 03, 2018 9:39:17 PM clientThread log
-INFO: Content-length: 60485
-Dec 03, 2018 9:39:17 PM clientThread log
-INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:40:10 PM clientThread log
-INFO: GET zoom.html
-Dec 03, 2018 9:40:11 PM clientThread log
-INFO: HTTP/1.1 200 OK
-Dec 03, 2018 9:40:11 PM clientThread log
-INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:40:11 PM clientThread log
-INFO: Date: Mon Dec 03 21:40:11 EST 2018
-Dec 03, 2018 9:40:11 PM clientThread log
+Dec 03, 2018 11:20:50 PM clientThread log
+INFO: GET /zoom.htmldfs HTTP/1.1
+Dec 03, 2018 11:20:50 PM clientThread log
+INFO: HTTP/1.1 404 File Not Found
+Dec 03, 2018 11:20:50 PM clientThread log
+INFO: Server: Data Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 03, 2018 11:20:50 PM clientThread log
+INFO: Date: Mon Dec 03 23:20:50 EST 2018
+Dec 03, 2018 11:20:50 PM clientThread log
 INFO: Content-type: text/html
-Dec 03, 2018 9:40:11 PM clientThread log
-INFO: Content-length: 13
-Dec 03, 2018 9:40:11 PM clientThread log
+Dec 03, 2018 11:20:50 PM clientThread log
+INFO: Content-length: 132
+Dec 03, 2018 11:20:50 PM clientThread log
 INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:40:18 PM clientThread log
+Dec 03, 2018 11:20:59 PM clientThread log
+INFO: null
+Dec 03, 2018 11:21:04 PM clientThread log
 INFO: GET popcan.txt
-Dec 03, 2018 9:40:19 PM clientThread log
+Dec 03, 2018 11:21:05 PM clientThread log
 INFO: HTTP/1.1 200 OK
-Dec 03, 2018 9:40:19 PM clientThread log
+Dec 03, 2018 11:21:05 PM clientThread log
 INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:40:19 PM clientThread log
-INFO: Date: Mon Dec 03 21:40:19 EST 2018
-Dec 03, 2018 9:40:19 PM clientThread log
+Dec 03, 2018 11:21:05 PM clientThread log
+INFO: Date: Mon Dec 03 23:21:05 EST 2018
+Dec 03, 2018 11:21:05 PM clientThread log
 INFO: Content-type: text/plain
-Dec 03, 2018 9:40:19 PM clientThread log
-INFO: Content-length: 51
-Dec 03, 2018 9:40:19 PM clientThread log
-INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:40:30 PM clientThread log
-INFO: get ../popcan.txt
-Dec 03, 2018 9:40:31 PM clientThread log
-INFO: HTTP/1.1 404 File Not Found
-Dec 03, 2018 9:40:31 PM clientThread log
-INFO: Server: Data Web Server project, Nathan Wichman, Prof. Kalafut
-Dec 03, 2018 9:40:31 PM clientThread log
-INFO: Date: Mon Dec 03 21:40:31 EST 2018
-Dec 03, 2018 9:40:31 PM clientThread log
-INFO: Content-type: text/html
-Dec 03, 2018 9:40:31 PM clientThread log
-INFO: Content-length: 132
-Dec 03, 2018 9:40:31 PM clientThread log
-INFO: Last-Modified: 12/02/2018 21:11:53
-Dec 03, 2018 9:40:43 PM clientThread log
+Dec 03, 2018 11:21:05 PM clientThread log
+INFO: Content-length: 58
+Dec 03, 2018 11:21:05 PM clientThread log
+INFO: Last-Modified: 12/03/2018 23:20:01
+Dec 03, 2018 11:21:12 PM clientThread log
 INFO: GET popcan.txt
-Dec 03, 2018 9:41:02 PM clientThread log
-INFO: Connection: close
+Dec 03, 2018 11:21:28 PM clientThread log
+INFO: HTTP/1.1 304 Not Modified
+Dec 03, 2018 11:21:28 PM clientThread log
+INFO: Date: Mon Dec 03 23:21:28 EST 2018
+Dec 03, 2018 11:21:32 PM clientThread log
+INFO: GET popcan.txt
+Dec 03, 2018 11:21:42 PM clientThread log
+INFO: HTTP/1.1 200 OK
+Dec 03, 2018 11:21:42 PM clientThread log
+INFO: Server: Datacom Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 03, 2018 11:21:42 PM clientThread log
+INFO: Date: Mon Dec 03 23:21:42 EST 2018
+Dec 03, 2018 11:21:42 PM clientThread log
+INFO: Content-type: text/plain
+Dec 03, 2018 11:21:42 PM clientThread log
+INFO: Content-length: 58
+Dec 03, 2018 11:21:42 PM clientThread log
+INFO: Last-Modified: 12/03/2018 23:20:01
+Dec 03, 2018 11:21:50 PM clientThread log
+INFO: PUT dakfak
+Dec 03, 2018 11:21:51 PM clientThread log
+INFO: HTTP/1.1 501 Not Implemented
+Dec 03, 2018 11:21:51 PM clientThread log
+INFO: Server: Data Com Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 03, 2018 11:21:51 PM clientThread log
+INFO: Date: Mon Dec 03 23:21:51 EST 2018
+Dec 03, 2018 11:21:51 PM clientThread log
+INFO: Content-type: text/html
+Dec 03, 2018 11:21:51 PM clientThread log
+INFO: Content-length: 216
+Dec 03, 2018 11:21:51 PM clientThread log
+INFO: Last-Modified: 12/02/2018 21:11:53
+Dec 03, 2018 11:22:02 PM clientThread log
+INFO: sdflsdljf
+Dec 03, 2018 11:22:03 PM clientThread log
+INFO: HTTP/1.1 501 Not Implemented
+Dec 03, 2018 11:22:03 PM clientThread log
+INFO: Server: Data Com Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 03, 2018 11:22:03 PM clientThread log
+INFO: Date: Mon Dec 03 23:22:03 EST 2018
+Dec 03, 2018 11:22:03 PM clientThread log
+INFO: Content-type: text/html
+Dec 03, 2018 11:22:03 PM clientThread log
+INFO: Content-length: 216
+Dec 03, 2018 11:22:03 PM clientThread log
+INFO: Last-Modified: 12/02/2018 21:11:53
+Dec 03, 2018 11:22:08 PM clientThread log
+INFO: GET skfksj
+Dec 03, 2018 11:22:09 PM clientThread log
+INFO: HTTP/1.1 404 File Not Found
+Dec 03, 2018 11:22:09 PM clientThread log
+INFO: Server: Data Web Server project, Nathan Wichman, Prof. Kalafut
+Dec 03, 2018 11:22:09 PM clientThread log
+INFO: Date: Mon Dec 03 23:22:09 EST 2018
+Dec 03, 2018 11:22:09 PM clientThread log
+INFO: Content-type: text/html
+Dec 03, 2018 11:22:09 PM clientThread log
+INFO: Content-length: 132
+Dec 03, 2018 11:22:09 PM clientThread log
+INFO: Last-Modified: 12/02/2018 21:11:53
+Dec 03, 2018 11:22:17 PM clientThread log
+INFO: fsflksjfkljslf

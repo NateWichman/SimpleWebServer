@@ -19,6 +19,9 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
+import java.util.concurrent.TimeoutException;
+
+
 /*********************************************************
 Basic web server. Handles HTTP GET requests only, all
 other request will send back a 501 unnsupported method 
@@ -70,6 +73,7 @@ public class Server{
 				}
 			}
 		}
+
 		//Creating Log
 		try{
 			fileHandler = new FileHandler(LOG_FILE);
@@ -155,7 +159,7 @@ class clientThread extends Thread{
 	@Override
 	public void run(){
 		System.out.println("A client has connected");
-		
+
 		//Holds received information
 		String input = "";
 		
@@ -168,19 +172,27 @@ class clientThread extends Thread{
 				//private helper method
 				log(input);
 
-				String total = "";
+				Vector<String> total = new Vector<String>();
 				while(true){
 					String line = in.readLine();
 					if(line.equals("")){
 						break;
 					}else{
-						total += line;
+						total.addElement(line);
 					}
 				}
-
-
-				System.out.println("total: " + total);
-
+				
+				String date = "";
+				boolean checkIfModified = false;
+				//Checking for if-modified-since header to see if we need to take action
+				for(String element : total){
+					if(element.contains("if-modified-since: ")){
+						date = element.substring(19);
+						checkIfModified = true;
+						System.out.println("DATE: " + date);
+					}
+				}
+			
 				//Breaking while loop to close connection if the client requests
 				if(input.contains("Connection: close") || total.contains("Connection: close")){
 					break;
@@ -219,6 +231,16 @@ class clientThread extends Thread{
 						fileIn.read(fileData);
 						fileIn.close();
 						
+						if(checkIfModified){
+							if(Server.sdf.format(file.lastModified()).compareTo(date) > 0){
+								System.out.println("DATE IS LARGER");
+							}
+							else{
+								System.out.println("DATE IS SMALLER");
+								sendNotModified();
+								continue;
+							}
+						}
 						//Send file to client *Private Helper Method*
 						sendFileToClient(fileData, file);
 
@@ -387,6 +409,16 @@ class clientThread extends Thread{
 		log("Content-length: " + (int) file.length());
 		log("Last-Modified: " + Server.sdf.format(file.lastModified()));
 	}
+
+	private void sendNotModified(){
+		out.println("HTTP/1.1 304 Not Modified");
+		out.println("Date: " + new Date());
+		out.println();
+		out.flush();
+
+		log("HTTP/1.1 304 Not Modified");
+		log("Date: " + new Date());
+	}
 	/*****************************************************
 	gets the content type of an inputted file
 	
@@ -419,3 +451,4 @@ class clientThread extends Thread{
 	}
 
 }
+
